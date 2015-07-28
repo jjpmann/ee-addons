@@ -1,6 +1,8 @@
-<?php namespace jjpmann/ee/addons;
+<?php
 
-class BaseExtension
+namespace EE\Addons\Extension;
+
+abstract class BaseExtension
 {
 
     public $name             = 'BaseExtension';
@@ -18,7 +20,6 @@ class BaseExtension
     public function __construct($settings = '')
     {
 
-        $this->EE =& get_instance();
         $this->settings = $settings;
 
         //Allow for config overrides
@@ -27,7 +28,7 @@ class BaseExtension
         // -------------------------------------------
         //  Prepare Hooks
         // -------------------------------------------
-        $qry = $this->EE->db->get_where('extensions', array('class' => $this->package));
+        $qry = ee()->db->get_where('extensions', array('class' => $this->package));
 
         if ($qry->num_rows()) {
             foreach ($qry->result_array() as $key => $item) {
@@ -38,16 +39,17 @@ class BaseExtension
         // -------------------------------------------
         //  Prepare Cache
         // -------------------------------------------
-        if (! isset($this->EE->session->cache[$this->package])) {
-            $this->EE->session->cache[$this->package] = array();
+        if (! isset(ee()->session->cache[$this->package])) {
+            ee()->session->cache[$this->package] = array();
         }
-        $this->cache =& $this->EE->session->cache[$this->package];
+        $this->cache =& ee()->session->cache[$this->package];
 
         $this->cache['settings'] = $this->settings;
 
         // -------------------------------------------
         // Load Log ??
         // -------------------------------------------
+        
     }
 
     /**
@@ -75,8 +77,8 @@ class BaseExtension
         $config_items = array();
 
         foreach ($this->settings_default as $key => $value) {
-            if ($this->EE->config->item($key)) {
-                $config_items[$key] = $this->EE->config->item($key);
+            if (ee()->config->item($key)) {
+                $config_items[$key] = ee()->config->item($key);
             }
         }
         
@@ -93,10 +95,10 @@ class BaseExtension
     public function _log($message)
     {
 
-        $this->EE->load->library('logger');
-        $this->EE->load->library('user_agent');
+        ee()->load->library('logger');
+        ee()->load->library('user_agent');
 
-        $this->EE->logger->developer($this->package . ' - ' . $message);
+        ee()->logger->developer($this->package . ' - ' . $message);
     }
 
 
@@ -137,7 +139,7 @@ class BaseExtension
                     'enabled'   => 'y'
                 );
 
-                $this->EE->db->insert('extensions', $data);
+                ee()->db->insert('extensions', $data);
             }
 
         }
@@ -167,8 +169,8 @@ class BaseExtension
         // Add any new hooks
         $this->add_new_hooks();
 
-        $this->EE->db->where('class', $this->package);
-        $this->EE->db->update(
+        ee()->db->where('class', $this->package);
+        ee()->db->update(
             'extensions',
             array('version' => $this->version)
         );
@@ -183,7 +185,7 @@ class BaseExtension
      */
     public function disable_extension()
     {
-        $this->EE->db->where('class', $this->package);
-        $this->EE->db->delete('extensions');
+        ee()->db->where('class', $this->package);
+        ee()->db->delete('extensions');
     }
 }
