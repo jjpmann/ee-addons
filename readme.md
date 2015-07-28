@@ -5,6 +5,6 @@
 
 ## Intro
 
-This package helps you build out ExpressionEngine v2 addons quicky.
+This package helps you build out ExpressionEngine v2 addons quicky. Please use sample files if needed.
 
 
