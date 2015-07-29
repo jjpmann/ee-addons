@@ -6,7 +6,7 @@ abstract class BaseExtension
 {
 
     public $name             = 'BaseExtension';
-    public $version          = '0.0.1';
+    public $version          = '0.0.0';
     public $description      = '';
     public $settings_exist   = 'n';
     public $docs_url         = '';
@@ -20,6 +20,8 @@ abstract class BaseExtension
     public function __construct($settings = '')
     {
 
+        $this->package = __CLASS__;
+        
         $this->settings = $settings;
 
         //Allow for config overrides
