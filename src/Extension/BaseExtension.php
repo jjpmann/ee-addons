@@ -17,10 +17,14 @@ abstract class BaseExtension
     protected $hooks            = array();
     protected $current_hooks    = array();
 
+    protected $EE;
+    protected $output;
+    protected $spl;
+
     public function __construct($settings = '')
     {
 
-        $this->package = __CLASS__;
+        $this->package = get_called_class();
         
         $this->settings = $settings;
 
@@ -38,20 +42,16 @@ abstract class BaseExtension
             }
         }
 
-        // -------------------------------------------
-        //  Prepare Cache
-        // -------------------------------------------
-        if (! isset(ee()->session->cache[$this->package])) {
-            ee()->session->cache[$this->package] = array();
-        }
-        $this->cache =& ee()->session->cache[$this->package];
+        // // -------------------------------------------
+        // //  Prepare Cache
+        // // -------------------------------------------
+        // if (! isset(ee()->session->cache[$this->package])) {
+        //     ee()->session->cache[$this->package] = array();
+        // }
+        // $this->cache =& ee()->session->cache[$this->package];
 
-        $this->cache['settings'] = $this->settings;
+        // $this->cache['settings'] = $this->settings;
 
-        // -------------------------------------------
-        // Load Log ??
-        // -------------------------------------------
-        
     }
 
     /**
