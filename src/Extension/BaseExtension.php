@@ -4,18 +4,17 @@ namespace EE\Addons\Extension;
 
 abstract class BaseExtension
 {
+    public $name = 'BaseExtension';
+    public $version = '0.0.0';
+    public $description = '';
+    public $settings_exist = 'n';
+    public $docs_url = '';
+    public $settings = [];
 
-    public $name             = 'BaseExtension';
-    public $version          = '0.0.0';
-    public $description      = '';
-    public $settings_exist   = 'n';
-    public $docs_url         = '';
-    public $settings         = array();
-
-    protected $settings_default = array();
-    protected $package          = '';
-    protected $hooks            = array();
-    protected $current_hooks    = array();
+    protected $settings_default = [];
+    protected $package = '';
+    protected $hooks = [];
+    protected $current_hooks = [];
 
     protected $EE;
     protected $output;
@@ -23,9 +22,8 @@ abstract class BaseExtension
 
     public function __construct($settings = '')
     {
-
         $this->package = get_called_class();
-        
+
         $this->settings = $settings;
 
         //Allow for config overrides
@@ -34,7 +32,7 @@ abstract class BaseExtension
         // -------------------------------------------
         //  Prepare Hooks
         // -------------------------------------------
-        $qry = ee()->db->get_where('extensions', array('class' => $this->package));
+        $qry = ee()->db->get_where('extensions', ['class' => $this->package]);
 
         if ($qry->num_rows()) {
             foreach ($qry->result_array() as $key => $item) {
@@ -51,11 +49,10 @@ abstract class BaseExtension
         // $this->cache =& ee()->session->cache[$this->package];
 
         // $this->cache['settings'] = $this->settings;
-
     }
 
     /**
-     * Settings
+     * Settings.
      *
      * This function returns the settings for the extensions
      *
@@ -67,7 +64,7 @@ abstract class BaseExtension
     // }
 
     /**
-     * Config Overrides
+     * Config Overrides.
      *
      * This function will merge with config overrides
      *
@@ -76,36 +73,34 @@ abstract class BaseExtension
     public function applyConfigOverrides()
     {
         // init
-        $config_items = array();
+        $config_items = [];
 
         foreach ($this->settings_default as $key => $value) {
             if (ee()->config->item($key)) {
                 $config_items[$key] = ee()->config->item($key);
             }
         }
-        
+
         if (is_array($this->settings)) {
             $this->settings = array_merge($this->settings, $config_items);
         }
     }
 
     /**
-    * Log to the developer log if the setting is turned on
-    *
-    * @return void
-    */
+     * Log to the developer log if the setting is turned on.
+     *
+     * @return void
+     */
     public function _log($message)
     {
-
         ee()->load->library('logger');
         ee()->load->library('user_agent');
 
-        ee()->logger->developer($this->package . ' - ' . $message);
+        ee()->logger->developer($this->package.' - '.$message);
     }
 
-
     /**
-     * Activate Extension
+     * Activate Extension.
      *
      * This function enters the extension into the exp_extensions table
      *
@@ -121,42 +116,38 @@ abstract class BaseExtension
     }
 
     /**
-     * Add New Hooks
-     *
+     * Add New Hooks.
      */
     private function add_new_hooks()
     {
-        
+
         // ADD New Actions
         foreach ($this->hooks as $hook => $method) {
             // check if its not installed
             if (!isset($this->current_hooks[$hook])) {
-                $data = array(
+                $data = [
                     'class'     => $this->package,
                     'method'    => $method,
                     'hook'      => $hook,
                     'settings'  => serialize($this->settings()),
                     'priority'  => 10,
                     'version'   => $this->version,
-                    'enabled'   => 'y'
-                );
+                    'enabled'   => 'y',
+                ];
 
                 ee()->db->insert('extensions', $data);
             }
-
         }
-
     }
     // ----------------------------------------------------------------
 
-
     /**
-     * Update Extension
+     * Update Extension.
      *
      * This function performs any necessary db updates when the extension
      * page is visited
      *
-     * @return  mixed   void on update / false if none
+     * @return mixed void on update / false if none
      */
     public function update_extension($current = '')
     {
@@ -174,12 +165,12 @@ abstract class BaseExtension
         ee()->db->where('class', $this->package);
         ee()->db->update(
             'extensions',
-            array('version' => $this->version)
+            ['version' => $this->version]
         );
     }
 
     /**
-     * Disable Extension
+     * Disable Extension.
      *
      * This method removes information from the exp_extensions table
      *
