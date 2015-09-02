@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 namespace EE\Addons\Module;
 
@@ -7,32 +8,32 @@ abstract class BaseModuleUpdate
     public $version = '0.0.0';
 
     /**
-     * Installation Method
+     * Installation Method.
      *
-     * @return  boolean
+     * @return bool
      */
     public function install()
     {
-        ee()->db->insert('modules', array(
+        ee()->db->insert('modules', [
             'module_name'        => 'Test',
             'module_version'     => $this->version,
             'has_cp_backend'     => 'n',
             'has_publish_fields' => 'n',
-        ));
+        ]);
 
-        return TRUE;
+        return true;
     }
 
     /**
-     * Uninstall
+     * Uninstall.
      *
-     * @return  boolean
+     * @return bool
      */
     public function uninstall()
     {
         ee()->db->where('class', 'Test')->delete('actions');
 
-        $mod_id = ee()->db->select('module_id')->get_where('modules', array('module_name' => 'Test'))->row('module_id');
+        $mod_id = ee()->db->select('module_id')->get_where('modules', ['module_name' => 'Test'])->row('module_id');
         ee()->db->where('module_id', $mod_id)->delete('module_member_groups');
         ee()->db->where('module_name', 'Test')->delete('modules');
 
@@ -42,17 +43,17 @@ abstract class BaseModuleUpdate
         ee()->dbforge->drop_table('table_name');
         */
 
-        return TRUE;
+        return true;
     }
 
     /**
-     * Module Updater
+     * Module Updater.
      *
-     * @return  boolean
+     * @return bool
      */
     public function update($current = '')
     {
-        return TRUE;
+        return true;
     }
 }
 
