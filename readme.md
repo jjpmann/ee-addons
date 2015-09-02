@@ -1,6 +1,9 @@
 ## EE Add-ons
 
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![Latest Stable Version](https://poser.pugx.org/jjpmann/ee-addons/v/stable)](https://packagist.org/packages/jjpmann/ee-addons) 
+[![Total Downloads](https://poser.pugx.org/jjpmann/ee-addons/downloads)](https://packagist.org/packages/jjpmann/ee-addons) 
+[![Latest Unstable Version](https://poser.pugx.org/jjpmann/ee-addons/v/unstable)](https://packagist.org/packages/jjpmann/ee-addons) 
+[![License](https://poser.pugx.org/jjpmann/ee-addons/license)](https://packagist.org/packages/jjpmann/ee-addons)
 
 
 ## Intro
