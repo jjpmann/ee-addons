@@ -1,6 +1,6 @@
 {
     "name": "jjpmann/ee-addons",
-    "type": "library",
+    "type": "ee3-addon",
     "description": "Base addons builder for ExpressionEngine 2",
     "keywords": ["eecms", "addons", "modules", "extensions", "fieldtypes"],
     "homepage": "http://github.com/jjpmann/ee-addons",
@@ -12,9 +12,16 @@
             "homepage": "http://github.com/jjpmann"
         }
     ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "/Users/jerryprice/git/installers"
+        }
+    ],
     "require": {
         "php": ">=5.3.2",
-        "composer/installers": "~1.0",
+        "jjpmann/installers": "~1.0",
     },
     "autoload": {
         "psr-4": {
