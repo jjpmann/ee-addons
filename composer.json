@@ -1,6 +1,6 @@
 {
     "name": "jjpmann/ee-addons",
-    "type": "ee3-addon",
+    "type": "wordpress-plugin",
     "description": "Base addons builder for ExpressionEngine 2",
     "keywords": ["eecms", "addons", "modules", "extensions", "fieldtypes"],
     "homepage": "http://github.com/jjpmann/ee-addons",
