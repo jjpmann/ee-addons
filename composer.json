@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "/Users/jerryprice/git/installers"
+            "url": "git@github.com:jjpmann/installers.git"
         }
     ],
     "require": {
@@ -27,5 +27,8 @@
         "psr-4": {
             "EE\\Addons\\": "src/"
         }
+    },
+    "extra": {
+        "installer-name": "ee-addons"
     }
 }
