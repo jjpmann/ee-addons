@@ -1,6 +1,5 @@
 <?php
 
-
 namespace EE\Addons\Module;
 
 abstract class BaseModuleUpdate
