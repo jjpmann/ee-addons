@@ -51,6 +51,20 @@ abstract class BaseExtension
         // $this->cache['settings'] = $this->settings;
     }
 
+    public function settings()
+    {
+        return $this->settingsForm();
+    }
+
+    abstract public function settingsForm();
+
+    public function save_settings()
+    {
+        return $this->settingsSave();
+    }
+
+    //abstract public function settingsSave();
+
     /**
      * Settings.
      *
