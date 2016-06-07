@@ -72,10 +72,10 @@ abstract class BaseExtension
      *
      * @return settings array
      */
-    // public function settings()
-    // {
-    // //   return $settings;
-    // }
+    public function settings()
+    {
+       return $settings;
+    }
 
     /**
      * Config Overrides.
