@@ -74,7 +74,7 @@ abstract class BaseExtension
      */
     public function settings()
     {
-       return $settings;
+       return $this->settings;
     }
 
     /**
