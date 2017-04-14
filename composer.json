@@ -1,7 +1,7 @@
 {
     "name": "jjpmann/ee-addons",
     "type": "library",
-    "description": "Base addons builder for ExpressionEngine 2",
+    "description": "Base addons builder for ExpressionEngine 3",
     "keywords": ["eecms", "addons", "modules", "extensions", "fieldtypes"],
     "homepage": "http://github.com/jjpmann/ee-addons",
     "license": "MIT",
