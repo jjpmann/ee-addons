@@ -77,6 +77,22 @@ abstract class BaseExtension
        return $this->settings;
     }
 
+    public static function isLoaded()
+    {
+        echo "<pre>".__FILE__.'<br>'.__METHOD__.' : '.__LINE__."<br><br>"; var_dump( __CLASS__ ); exit;
+        
+
+        $qry = ee()->db
+                ->from('extensions')
+                ->where(array('class' => __CLASS__, 'enabled' => 'y'))
+                ->get();
+
+        if ($qry->num_rows() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Config Overrides.
      *
