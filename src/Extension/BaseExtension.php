@@ -16,13 +16,10 @@ abstract class BaseExtension
     protected $hooks = [];
     protected $current_hooks = [];
 
-    protected $EE;
-    protected $output;
-    protected $spl;
-
     public function __construct($settings = '')
     {
-        $this->package = get_called_class();
+        
+        $this->package = static::class;
 
         $this->settings = $settings;
 
@@ -79,10 +76,9 @@ abstract class BaseExtension
 
     public static function isLoaded()
     {
-    
         $qry = ee()->db
                 ->from('extensions')
-                ->where(array('class' => static::self, 'enabled' => 'y'))
+                ->where(array('class' => static::class, 'enabled' => 'y'))
                 ->get();
 
         if ($qry->num_rows() > 0) {
